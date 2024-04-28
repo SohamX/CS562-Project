@@ -20,10 +20,18 @@ def query():
     cur.execute("SELECT * FROM sales")
     
     _global = []
+        
     
-    for row in cur:
-        if row['quant'] > 10:
-            _global.append(row)
+    # Generate the code for sqlQuery
+    selectAttributes = "cust,prod,avg_quant,max_quant"
+    groupingAttributes = "cust,prod"
+    fVect = "avg_quant,max_quant,min_quant,count_quant"
+    havingCondition = ""
+    print("sqlQuery")
+    
+    # for row in cur:
+    #     if row['quant'] > 10:
+    #         _global.append(row)
     
     
     return tabulate.tabulate(_global,

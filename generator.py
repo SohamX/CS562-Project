@@ -1,4 +1,6 @@
-import subprocess
+# import subprocess
+from mfQuery import mfQuery
+from sqlQuery import sqlQuery
 
 
 def main():
@@ -7,11 +9,29 @@ def main():
     needed to run the query. That generated code should be saved to a 
     file (e.g. _generated.py) and then run.
     """
+    selectAttributes = "cust,prod,avg_quant,max_quant"
+    groupingVarCount = 0
+    groupingAttributes = "cust,prod"
+    fVect = "avg_quant,max_quant,min_quant,count_quant"
+    predicates = ""
+    havingCondition = ""
 
-    body = """
-    for row in cur:
-        if row['quant'] > 10:
-            _global.append(row)
+    #check if mf query or normal sql query
+    # if it is a mf query, then generate the code for mf query
+    if(groupingVarCount > 0):
+        algorithm = mfQuery(selectAttributes, groupingVarCount, groupingAttributes, fVect, predicates, havingCondition)
+    else:
+        algorithm = sqlQuery(selectAttributes, groupingAttributes, fVect, havingCondition)
+    # if it is a normal sql query, then generate the code for normal sql query
+
+    # Generate the body of the query
+
+
+    body = f"""    
+    {algorithm}
+    # for row in cur:
+    #     if row['quant'] > 10:
+    #         _global.append(row)
     """
 
     # Note: The f allows formatting with variables.
@@ -53,7 +73,7 @@ if "__main__" == __name__:
     # Write the generated code to a file
     open("_generated.py", "w").write(tmp)
     # Execute the generated code
-    subprocess.run(["python", "_generated.py"])
+    # subprocess.run(["python", "_generated.py"])
 
 
 if "__main__" == __name__:
