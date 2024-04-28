@@ -20,7 +20,8 @@ def query():
     cur.execute("SELECT * FROM sales")
     
     _global = []
-        
+       
+    MF_Struct = {}
     
     # Generate the code for sqlQuery
     selectAttributes = "cust,prod,avg_quant,max_quant"
