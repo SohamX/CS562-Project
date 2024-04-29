@@ -18,7 +18,7 @@ def mfQuery(selectAttributes, groupingVarCount, groupingAttributes, fVect, predi
     for i in range(int(groupingVarCount)+1):
 	
         if i == 0:
-            for row in cur:
+            for row in cursor:
                 key = ''
                 value = {{}}
                 for attr in groupingAttributes.split(','):

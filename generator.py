@@ -107,15 +107,31 @@ def main():
     # Note: The f allows formatting with variables.
     #       Also, note the indentation is preserved.
     tmp = f"""
+import os
 import psycopg2
 import psycopg2.extras
-from databaseConfig import dbconfig
-from sqlQuery import sqlQuery    
+import tabulate
+from dotenv import load_dotenv
+from prettytable import PrettyTable
+# from databaseConfig import dbconfig  
 
 MF_Struct = {{}}
 
 def query():
+    load_dotenv()
+    user = os.getenv('USER')
+    password = os.getenv('PASSWORD')
+    dbname = os.getenv('DBNAME')
+    conn = psycopg2.connect("dbname="+dbname+" user="+user+" password="+password,
+        cursor_factory=psycopg2.extras.DictCursor)
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM sales")
+    
+    # _global = []
     {body}
+    
+    # return tabulate.tabulate(_global,
+    #                     headers="keys", tablefmt="psql")
 
 def main():
     print(query())
