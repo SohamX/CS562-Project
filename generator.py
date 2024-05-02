@@ -79,12 +79,12 @@ def main():
     groupingVarCount = int(groupingVarCount)
 
     # Get the MFQuery structure from the user
-    # selectAttributes = "cust,1_max_quant,1_min_quant,1_count_quant" 
-    # groupingVarCount = 1
-    # groupingAttributes = "cust"
-    # fVect = "1_max_quant,1_min_quant,1_count_quant"
-    # predicates = "1.state = 'NY' and 1.year = 1992"
-    # havingCondition = ""
+    # selectAttributes = "cust,1_sum_quant,1_avg_quant,2_sum_quant,2_avg_quant,3_sum_quant,3_avg_quant"#"cust,1_max_quant,1_min_quant,1_count_quant" 
+    # groupingVarCount = 3#1
+    # groupingAttributes = "cust"#"cust"
+    # fVect = "1_sum_quant,1_avg_quant,2_sum_quant,2_avg_quant,3_sum_quant,3_avg_quant"#"1_max_quant,1_min_quant,1_count_quant"
+    # predicates = "1.state = 'NY',2.state = 'NJ',3.state = 'CT'"#"1.state = 'NY' and 1.year = 2016"
+    # havingCondition = "1_sum_quant > 2 * 2_sum_quant or 1_avg_quant > 3_avg_quant"#""
 
     #check if mf query or normal sql query
     # if it is a mf query, then generate the code for mf query
