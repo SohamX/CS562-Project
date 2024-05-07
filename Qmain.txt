@@ -1,0 +1,19 @@
+selectAttributes = "cust,prod,1_avg_quant,2_avg_quant"
+# groupingVarCount = 2
+# groupingAttributes = "cust,prod"
+# fVect = "1_avg_quant,2_avg_quant"
+# predicates = "1.state = 'NJ',2.quant > 1_avg_quant"
+# havingCondition = ""
+
+SELECT ATTRIBUTE(S):
+cust,prod,1_avg_quant,2_avg_quant
+NUMBER OF GROUPING VARIABLES(n):
+0
+GROUPING ATTRIBUTES(V):
+cust, prod
+F-VECT([F]):
+avg_quant, max_quant, min_quant, count_quant
+SELECT CONDITION-VECT([σ]):
+year=2017 and month=6
+HAVING_CONDITION(G):
+max_quant > 996 and avg_quant > 600

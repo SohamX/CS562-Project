@@ -48,7 +48,7 @@ def main():
                 i += 1
                 fVect = content[i].replace(" ", "")
                 i += 1
-            elif(content[i] == "SELECT CONDITION-VECT([σ]):"):
+            elif(content[i] == "SELECT CONDITION-VECT:"):
                 i += 1
                 predicates = content[i]
                 i += 1
@@ -135,7 +135,7 @@ def query():
 
 def apply_conditions(row, conditions):
     if conditions:
-        # Split conditions on 'and' and 'or'
+        # Splits conditions on 'and' and 'or'
         operators = []
         parts = []
         tmp = conditions
