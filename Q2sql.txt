@@ -1,5 +1,5 @@
 SELECT ATTRIBUTE(S):
-cust, prod, avg_quant, max_quant, min_quant
+cust, prod, month, avg_quant, max_quant, min_quant
 NUMBER OF GROUPING VARIABLES(n):
 0
 GROUPING ATTRIBUTES(V):
@@ -8,5 +8,3 @@ F-VECT([F]):
 avg_quant, max_quant, min_quant, count_quant
 SELECT CONDITION-VECT([σ]):
 year=2017
-HAVING_CONDITION(G):
-max_quant > 800 and avg_quant > 400

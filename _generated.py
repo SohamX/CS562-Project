@@ -22,11 +22,11 @@ def query():
     # _global = []
     
     
-    selectAttributes = "cust,prod,avg_quant,max_quant"
-    groupingAttributes = "cust,prod"
+    selectAttributes = "cust,prod,avg_quant,max_quant,min_quant"
+    groupingAttributes = "cust,prod,month"
     fVect = "avg_quant,max_quant,min_quant,count_quant"
     predicates = "year=2017"
-    havingCondition = "max_quant = 996 and avg_quant > 600"
+    havingCondition = "max_quant > 800 and avg_quant > 400"
 
 	# Retrieve the results.
     results = cursor.fetchall()
@@ -163,7 +163,7 @@ def apply_conditions(row, conditions):
                     result = result or res
             return result
         return False
-    return True  # No condition means process all rows
+    return True  # No condition so process all rows
 
 
 def main():

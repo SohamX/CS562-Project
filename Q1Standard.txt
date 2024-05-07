@@ -1,9 +1,5 @@
-SQL:
-SELECT cust, prod, avg(quant), max(quant)
-FROM sales
-GROUP BY cust,prod
-
-EMF:
-SELECT cust, prod, avg(quant), max(quant)
-FROM sales
-GROUP BY cust, prod
+select cust, prod, avg(quant), max(quant)
+from sales
+where year=2017
+group by cust, prod
+having max_quant = 996 and avg_quant > 600
