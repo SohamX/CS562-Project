@@ -7,6 +7,4 @@ prod, year
 F-VECT([F]):
 1_avg_quant, 2_sum_quant
 SELECT CONDITION-VECT:
-1.state = 'NJ' and 1.year = 2016, 2.month = 3 and 2.quant > 1_avg_quant 
-HAVING_CONDITION(G):
-1_avg_quant > 0.25 * 2_sum_quant
+1.state = 'NJ' and 1.year = 2016, 2.month = 3 and 2.quant > 1_avg_quant

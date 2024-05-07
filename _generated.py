@@ -28,7 +28,7 @@ def query():
     groupingAttributes = "prod,year"
     fVect = "1_avg_quant,2_sum_quant"
     predicates = "1.state = 'NJ' and 1.year = 2016, 2.month = 3 and 2.quant > 1_avg_quant"
-    havingCondition = "1_avg_quant > 0.25 * 2_sum_quant"
+    havingCondition = ""
     print("mfQuery")
 
     predicates = predicates.split(',')
