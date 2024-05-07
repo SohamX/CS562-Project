@@ -119,9 +119,9 @@ MF_Struct = {{}}
 
 def query():
     load_dotenv()
-    user = os.getenv('USER')
-    password = os.getenv('PASSWORD')
-    dbname = os.getenv('DBNAME')
+    user = os.getenv('DB_USER')
+    password = os.getenv('DB_PASSWORD')
+    dbname = os.getenv('DB_NAME')
     conn = psycopg2.connect("dbname="+dbname+" user="+user+" password="+password,
         cursor_factory=psycopg2.extras.DictCursor)
     cursor = conn.cursor()
@@ -132,6 +132,50 @@ def query():
     
     # return tabulate.tabulate(_global,
     #                     headers="keys", tablefmt="psql")
+
+def apply_conditions(row, conditions):
+    if conditions:
+        # Split conditions on 'and' and 'or'
+        operators = []
+        parts = []
+        tmp = conditions
+        
+        # Identify all operators and split conditions
+        while ' and ' in tmp or ' or ' in tmp:
+            if ' and ' in tmp:
+                pos = tmp.index(' and ')
+                parts.append(tmp[:pos])
+                operators.append('and')
+                tmp = tmp[pos+5:]  # skip ' and '
+            elif ' or ' in tmp:
+                pos = tmp.index(' or ')
+                parts.append(tmp[:pos])
+                operators.append('or')
+                tmp = tmp[pos+4:]  # skip ' or '
+        
+        parts.append(tmp)  # add the last or only part
+        
+        # Evaluate each condition part
+        results = []
+        for part in parts:
+            column, value = part.strip().split('=')
+            column = column.strip()
+            value = value.strip()
+            # Apply each condition to the row and store result
+            results.append(str(row[column]) == value)
+        
+        # Combine results based on operators
+        if results:
+            result = results[0]
+            for op, res in zip(operators, results[1:]):
+                if op == 'and':
+                    result = result and res
+                elif op == 'or':
+                    result = result or res
+            return result
+        return False
+    return True  # No condition so process all rows
+
 
 def main():
     print(query())

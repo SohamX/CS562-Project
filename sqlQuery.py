@@ -8,8 +8,10 @@ def sqlQuery(selectAttributes, groupingAttributes, fVect, predicates, havingCond
 
 	# Retrieve the results.
     results = cursor.fetchall()
+    
+    filtered_results = [row for row in results if apply_conditions(row, predicates)]
 
-    for row in results:
+    for row in filtered_results:
         key = '' #key to store into the MF Struct
         value = {{}} #value that will store the columns of the MF Struct for the given row
         for attr in groupingAttributes.split(','): #create key out of the grouping attributes of the current row in the table
@@ -59,7 +61,7 @@ def sqlQuery(selectAttributes, groupingAttributes, fVect, predicates, havingCond
 			#the eval string will be equal to the having condition, replaced with the values of the variables in question,
 			# then evaluated to check if the row of the MFStruct being examined is to be included in the output table
             for string in havingCondition.split(' '):
-                if string not in ['>', '<', '==', '<=', '>=', 'and', 'or', 'not', '*', '/', '+', '-']:
+                if string not in ['>', '<', '==', '=', '<=', '>=', 'and', 'or', 'not', '*', '/', '+', '-']:
                     try:
                         int(string)
                         evalString += string
